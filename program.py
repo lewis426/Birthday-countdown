@@ -74,12 +74,29 @@ def print_birthday_information(days):
 
 
 def main():
-    print_header()
-    bday = get_birthday_from_user()
-    print('Your date of birth is {0}'.format(bday))
-    today = datetime.date.today()
-    num_of_days = compute_days_between_dates(bday, today)
-    print_birthday_information(num_of_days)
+    cmd = "Yes"
+    while cmd.lower().strip() != 'no':
+        try:
+            while cmd.lower().strip() != 'yes' and cmd.lower().strip() != 'no':
+                try:
+                    print('Please enter yes or no')
+                    cmd = input('Would you like to restart (\'Yes or No?\'):')
+                    continue
+                except ValueError:
+                    print('Please enter a valid value')
+                    continue
+            if cmd.lower().strip() == 'yes':
+                print_header()
+                bday = get_birthday_from_user()
+                print('Your date of birth is {0}'.format(bday))
+                today = datetime.date.today()
+                num_of_days = compute_days_between_dates(bday, today)
+                print_birthday_information(num_of_days)
+                cmd = input('Would you like to restart (\'Yes or No?\'):')
+            else:
+                print('Goodbye')
+        except ValueError:
+            print('Please enter a valid value')
 
 
 main()
